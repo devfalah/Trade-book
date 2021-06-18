@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tredbook/components.dart';
 import 'package:tredbook/screens/otp_screen.dart';
 
+// ignore: must_be_immutable
 class PhoneAuthScreen extends StatelessWidget {
   static const id = "phoneAuthScreen";
   var _phoneController = TextEditingController();

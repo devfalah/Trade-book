@@ -2,17 +2,21 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tredbook/components.dart';
+import 'package:tredbook/firebaseService.dart';
+import 'package:tredbook/main.dart';
 import 'package:tredbook/screens/admin_pages/admin_home_page.dart';
 import 'package:tredbook/screens/main_pages/show_page.dart';
 import 'package:tredbook/screens/main_pages/subscriptions_page.dart';
+import 'package:tredbook/screens/setting_screen.dart';
 import 'package:tredbook/screens/user_profile_screen.dart';
 
 import '../appBrain.dart';
+import '../fUser.dart';
 import 'main_pages/home_page.dart';
 import 'main_pages/jobs_page.dart';
 
 class HomeScreen extends StatefulWidget {
-  static const id = "homeScreen";
+  static const routeName = "homeScreen";
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -27,6 +31,15 @@ class _HomeScreenState extends State<HomeScreen> {
     SubscriptionsPage(),
     JobsPage()
   ];
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
+  @override
+  void initState() {
+    setState(() {
+      _index = 0;
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +94,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               child: CircleAvatar(
-                backgroundImage: NetworkImage(avatarPlaceholderURL),
+                backgroundImage: NetworkImage(
+                  auth.currentUser.photoURL ?? avatarPlaceholderURL,
+                ),
               ),
             ),
             ListDrawerItem(
@@ -92,9 +107,20 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
             ListDrawerItem(title: "User Profile", icon: FontAwesomeIcons.bell),
-            ListDrawerItem(title: "User Profile", icon: Icons.settings),
             ListDrawerItem(
-                title: "User Profile", icon: FontAwesomeIcons.signOutAlt),
+              title: "Settings",
+              icon: Icons.settings,
+              onTap: () {
+                Navigator.pushNamed(context, SettingsScreen.routeName);
+              },
+            ),
+            ListDrawerItem(
+              title: "Sign out",
+              icon: FontAwesomeIcons.signOutAlt,
+              onTap: () {
+                FirebaseService().signOut(context);
+              },
+            ),
           ],
         ),
       ),
@@ -137,8 +163,8 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: CurvedNavigationBar(
         animationDuration: Duration(milliseconds: 400),
         color: Colors.purple,
-        buttonBackgroundColor: Colors.white,
-        backgroundColor: Colors.white,
+        buttonBackgroundColor: darkMode ? Colors.grey[700] : Colors.white,
+        backgroundColor: darkMode ? Colors.grey[700] : Colors.white,
         height: 50,
         items: [
           Icon(Icons.home, size: 30),

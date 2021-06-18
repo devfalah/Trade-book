@@ -23,26 +23,28 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
+  barcode_widget: ^2.0.1
+  cloud_firestore: ^1.0.3
   cupertino_icons: ^1.0.2
+  curved_navigation_bar: ^0.3.7
+  firebase_auth: ^1.0.1
+  firebase_core: ^1.0.1
+  firebase_storage: ^8.1.3
   font_awesome_flutter: ^9.1.0
   google_sign_in: ^5.0.1
-  firebase_core: ^1.0.1
-  firebase_auth: ^1.0.1
-  cloud_firestore: ^1.0.3
-  rxdart: ^0.25.0
-  pinput: ^0.2.0
-  curved_navigation_bar: ^0.3.7
   image_picker: ^0.8.0+3
-  firebase_storage: ^8.1.3
-  barcode_widget: ^2.0.1
-  share: ^2.0.4
   path_provider: ^2.0.2
-
-
+  pinput: ^0.2.0
+  provider: null
+  rxdart: ^0.25.0
+  share: ^2.0.4
+  url_launcher: ^6.0.6
+  cached_network_image:
+  location:
+  shared_preferences: 
+  intl:
+  admob_flutter: ^1.0.1
+  flutter_native_admob: ^2.1.0+3
 
 
 
@@ -55,7 +57,6 @@ dev_dependencies:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
 # The following section is specific to Flutter.
 flutter:
 
@@ -68,13 +69,10 @@ flutter:
   assets:
     - assets/images/
   #   - images/a_dot_ham.jpeg
-
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
-
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
-
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a
@@ -84,7 +82,6 @@ flutter:
     - family: XB_ZAR
       fonts:
         - asset: assets/fonts/XB_Zar.ttf
-       
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:

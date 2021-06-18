@@ -25,15 +25,18 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   File _image;
 
   final picker = ImagePicker();
-  var _displayName = TextEditingController();
-  var _displayEmail = TextEditingController();
-  var _displaPhone = TextEditingController();
-  var _barcodeKey = GlobalKey();
+  String imageUrl;
+
+  var displayName = TextEditingController();
+  var displayEmail = TextEditingController();
+  var displaPhone = TextEditingController();
+
+  var barcodeKey = GlobalKey();
   final FirebaseFirestore db = FirebaseFirestore.instance;
 
   bool _uploading = false;
   bool _edited = false;
-  String imageUrl;
+
   @override
   void initState() {
     getUserProfile();
@@ -96,39 +99,39 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                           children: [
                             _edited
                                 ? TextField(
-                                    controller: _displayName,
+                                    controller: displayName,
                                     decoration: InputDecoration(
                                       labelText: "Display name",
                                       hintText: "Enter your name",
                                     ),
                                   )
-                                : Text(_displayName.text),
+                                : Text(displayName.text),
                             SizedBox(height: 10.0),
                             _edited
                                 ? TextField(
-                                    controller: _displayEmail,
+                                    controller: displayEmail,
                                     decoration: InputDecoration(
                                       labelText: "Email",
                                       hintText: "Enter your email",
                                     ),
                                   )
-                                : Text(_displayEmail.text),
+                                : Text(displayEmail.text),
                             SizedBox(height: 20.0),
                             _edited
                                 ? TextField(
-                                    controller: _displaPhone,
+                                    controller: displaPhone,
                                     decoration: InputDecoration(
                                       labelText: "Display Phone",
                                       hintText: "Enter your Phone",
                                     ),
                                   )
-                                : Text(_displaPhone.text),
+                                : Text(displaPhone.text),
                             SizedBox(height: 20.0),
                           ],
                         ),
                       ),
                       RepaintBoundary(
-                        key: _barcodeKey,
+                        key: barcodeKey,
                         child: Container(
                           color: Colors.white,
                           child: BarcodeWidget(
@@ -156,7 +159,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   shareImage() async {
     try {
       RenderRepaintBoundary boundary =
-          _barcodeKey.currentContext.findRenderObject();
+          barcodeKey.currentContext.findRenderObject();
       ui.Image image = await boundary.toImage(pixelRatio: 5.0);
       ByteData byteData =
           await image.toByteData(format: ui.ImageByteFormat.png);
@@ -167,7 +170,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
           File("$dir/" + DateTime.now().microsecond.toString() + ".png");
       await file.writeAsBytes(pngBytes);
       Share.shareFiles([file.path],
-          text: 'tradebook user: ${_displayName.text}');
+          text: 'tradebook user: ${displayName.text}');
     } catch (e) {}
   }
 
@@ -215,10 +218,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
       DocumentReference ref = db.collection('users').doc(auth.currentUser.uid);
       return ref.set(
         {
-          'email': _displayEmail.text,
-          'displayName': _displayName.text,
+          'email': displayEmail.text,
+          'displayName': displayName.text,
           'lastSeen': DateTime.now(),
-          'phone': _displaPhone.text,
+          'phone': displaPhone.text,
           'photoUrl': imageUrl,
         },
       );
@@ -226,14 +229,18 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   }
 
   getUserProfile() {
+    final FirebaseFirestore db = FirebaseFirestore.instance;
+
     DocumentReference ref = db.collection('users').doc(auth.currentUser.uid);
-    ref.get().then((value) => setState(() {
-          if (value.data() != null) {
-            imageUrl = value.get('photoUrl');
-            _displayName.text = value.get('displayName');
-            _displayEmail.text = value.get('email');
-            _displaPhone.text = value.get('phone');
-          }
-        }));
+    ref.get().then((value) {
+      if (value.data() != null) {
+        setState(() {
+          imageUrl = value.get('photoUrl');
+          displayName.text = value.get('displayName');
+          displayEmail.text = value.get('email');
+          displaPhone.text = value.get('phone');
+        });
+      }
+    });
   }
 }

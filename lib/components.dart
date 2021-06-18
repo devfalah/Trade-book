@@ -132,3 +132,50 @@ class UserRoundedPic extends StatelessWidget {
     );
   }
 }
+
+class CustomCard extends StatelessWidget {
+  CustomCard(
+      {this.backgroundColor,
+      @required this.onPressed,
+      @required this.iconSize,
+      @required this.icon,
+      @required this.txt,
+      this.iconColor});
+  final Function onPressed;
+  final Color backgroundColor;
+  final double iconSize;
+  final Color iconColor;
+  final String txt;
+  final IconData icon;
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Padding(
+        padding: const EdgeInsets.all(2.0),
+        child: Card(
+          child: (Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(child: Container()),
+              IconButton(
+                color: iconColor,
+                onPressed: onPressed,
+                iconSize: iconSize,
+                icon: Icon(icon),
+              ),
+              Expanded(child: Container()),
+              Text(
+                txt,
+                style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontFamily: 'XB_Zar',
+                    fontSize: iconSize / 3),
+              ),
+              Expanded(child: Container()),
+            ],
+          )),
+        ),
+      ),
+    );
+  }
+}

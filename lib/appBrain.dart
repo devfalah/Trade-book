@@ -13,8 +13,6 @@ final String avatarPlaceholderURL =
 const sCashedImg = 800;
 const lCashedImg = 2000;
 
-final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-
 // OTP Consts:
 final BoxDecoration pinPutDecoration = BoxDecoration(
   color: const Color.fromRGBO(43, 46, 66, 1),

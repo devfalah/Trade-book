@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:tredbook/screens/login_screen.dart';
 import 'fUser.dart';
 import 'screens/home_screen.dart';
 
@@ -40,7 +41,7 @@ class FirebaseService {
         idToken: googleAuth.idToken, accessToken: googleAuth.accessToken);
     final authResult = await auth.signInWithCredential(credential);
     if (authResult.user != null) {
-      Navigator.pushNamed(context, HomeScreen.id);
+      Navigator.pushNamed(context, HomeScreen.routeName);
     }
     updateUserData(authResult.user);
     print('signed in' + authResult.user.displayName);
@@ -62,8 +63,11 @@ class FirebaseService {
     );
   }
 
-  void signOut() {
+  Future<void> signOut(context) async {
     auth.signOut();
+    await _googleSignIn.disconnect();
+    await _googleSignIn.signOut();
+    Navigator.pushReplacementNamed(context, LoginScreen.routeName);
   }
 
   verifyPhone(context, phone) async {
