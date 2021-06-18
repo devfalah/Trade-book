@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "238654494052",
+    "project_id": "trade-book-51577",
+    "storage_bucket": "trade-book-51577.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:238654494052:android:b079a2ef11b6c4aa455671",
+        "android_client_info": {
+          "package_name": "com.example.tredbook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "238654494052-5nkmpa0204bu03aajv3iarkl24c521pm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tredbook",
+            "certificate_hash": "5b882c7a6fb30c2a60cee0699a52d4355bf25bbd"
+          }
+        },
+        {
+          "client_id": "238654494052-fooj8kuq5aee54u3acie61drvqvf8l6c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tredbook",
+            "certificate_hash": "fd97931e5a8e2a7105434b4ff682aac261df2104"
+          }
+        },
+        {
+          "client_id": "238654494052-7o1b7u169t6h89o878e0hcqpvogpn9ph.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANJX4KRXnrUclfT7KtLgr7CcGHZezHXxc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "238654494052-7o1b7u169t6h89o878e0hcqpvogpn9ph.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
